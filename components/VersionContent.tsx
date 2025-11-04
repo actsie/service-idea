@@ -4,6 +4,51 @@ interface VersionContentProps {
   version: string;
 }
 
+interface HeroContent {
+  title: string;
+  subtitle: string;
+  cta: string;
+}
+
+interface ProblemContent {
+  title: string;
+  points: string[];
+}
+
+interface FeatureItem {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface FeaturesContent {
+  title: string;
+  items: FeatureItem[];
+}
+
+interface StatItem {
+  value: string;
+  label: string;
+}
+
+interface StatsContent {
+  title: string;
+  items: StatItem[];
+}
+
+interface FinalCtaContent {
+  title: string;
+  cta: string;
+}
+
+interface ContentData {
+  hero: HeroContent;
+  problem?: ProblemContent;
+  features: FeaturesContent;
+  stats?: StatsContent;
+  finalCta: FinalCtaContent;
+}
+
 export default function VersionContent({ version }: VersionContentProps) {
   const content = getContentForVersion(version);
 
@@ -218,8 +263,8 @@ export default function VersionContent({ version }: VersionContentProps) {
   );
 }
 
-function getContentForVersion(version: string) {
-  const contents: Record<string, any> = {
+function getContentForVersion(version: string): ContentData {
+  const contents: Record<string, ContentData> = {
     v1: {
       hero: {
         title: 'Your Chief AI Automation Officer',
