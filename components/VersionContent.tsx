@@ -318,27 +318,35 @@ export default function VersionContent({ version }: VersionContentProps) {
                 key={index}
                 className="group cursor-pointer transform transition-all duration-200 hover:scale-105 hover:-rotate-1"
               >
-                <div className="text-white rounded-3xl border border-white/10 bg-gradient-to-br from-[#010101] via-[#090909] to-[#010101] duration-200 z-10 relative backdrop-blur-xl hover:border-white/25 overflow-hidden w-full">
+                <div
+                  className="text-gray-900 rounded-3xl border border-gray-200 duration-200 z-10 relative backdrop-blur-xl hover:border-gray-300 overflow-hidden w-full"
+                  style={{
+                    backgroundImage: 'linear-gradient(to right, #fdf6ef, #fcf3fa, #f9f1fc, #f4eefc)'
+                  }}
+                >
                   {/* Animated Background Effects */}
                   <div className="absolute inset-0 z-0 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-white/10 opacity-40 group-hover:opacity-60 transition-opacity duration-200" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/30 to-white/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
 
-                    <div className="absolute -bottom-20 -left-20 w-48 h-48 rounded-full bg-gradient-to-tr from-white/10 to-transparent blur-3xl opacity-0 group-hover:opacity-50 transform group-hover:scale-110 transition-all duration-300 group-hover:animate-bounce" style={{ animationDelay: '0.5s' }} />
+                    <div className="absolute -bottom-20 -left-20 w-48 h-48 rounded-full bg-gradient-to-tr from-purple-200/30 to-transparent blur-3xl opacity-0 group-hover:opacity-50 transform group-hover:scale-110 transition-all duration-300 group-hover:animate-bounce" style={{ animationDelay: '0.5s' }} />
 
-                    <div className="absolute top-10 left-10 w-16 h-16 rounded-full bg-white/5 blur-xl group-hover:animate-ping" />
-                    <div className="absolute bottom-16 right-16 w-12 h-12 rounded-full bg-white/5 blur-lg group-hover:animate-ping" style={{ animationDelay: '1s' }} />
+                    <div className="absolute top-10 left-10 w-16 h-16 rounded-full bg-purple-200/20 blur-xl group-hover:animate-ping" />
+                    <div className="absolute bottom-16 right-16 w-12 h-12 rounded-full bg-pink-200/20 blur-lg group-hover:animate-ping" style={{ animationDelay: '1s' }} />
 
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-500" />
                   </div>
 
                   <div className="p-8 relative z-10">
                     <div className="flex flex-col items-center text-center">
                       {/* Icon Circle */}
                       <div className="relative mb-6">
-                        <div className="absolute inset-0 rounded-full border-2 border-white/20 group-hover:animate-ping" />
-                        <div className="absolute inset-0 rounded-full border border-white/10 group-hover:animate-pulse" style={{ animationDelay: '0.5s' }} />
+                        <div className="absolute inset-0 rounded-full border-2 border-purple-300/40 group-hover:animate-ping" />
+                        <div className="absolute inset-0 rounded-full border border-purple-200/30 group-hover:animate-pulse" style={{ animationDelay: '0.5s' }} />
 
-                        <div className="p-6 rounded-full backdrop-blur-lg border border-white/20 bg-gradient-to-br from-black/80 to-black/60 transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">
+                        <div
+                          className="p-6 rounded-full backdrop-blur-lg border border-purple-300/30 transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-300"
+                          style={{ backgroundColor: '#5E50A0' }}
+                        >
                           <div className="transform group-hover:rotate-180 transition-transform duration-300 w-10 h-10 text-white">
                             {getIconSvg(item.icon)}
                           </div>
@@ -347,14 +355,14 @@ export default function VersionContent({ version }: VersionContentProps) {
 
                       {/* Title */}
                       <div className="mb-4 transform group-hover:scale-105 transition-transform duration-200">
-                        <p className="text-xl font-bold bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">
+                        <p className="text-xl font-bold text-gray-900">
                           {item.title}
                         </p>
                       </div>
 
                       {/* Description */}
                       <div className="space-y-1 max-w-sm">
-                        <p className="text-gray-300 text-sm leading-relaxed transform group-hover:text-gray-200 transition-colors duration-200">
+                        <p className="text-gray-700/80 text-sm leading-relaxed transform group-hover:text-gray-900 transition-colors duration-200">
                           {item.description}
                         </p>
                       </div>
@@ -362,8 +370,8 @@ export default function VersionContent({ version }: VersionContentProps) {
                   </div>
 
                   {/* Corner Accents */}
-                  <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-white/10 to-transparent rounded-br-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                  <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-white/10 to-transparent rounded-tl-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                  <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-white/40 to-transparent rounded-br-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                  <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-white/40 to-transparent rounded-tl-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                 </div>
               </div>
             ))}
