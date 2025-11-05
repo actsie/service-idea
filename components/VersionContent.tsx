@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import Lottie from 'lottie-react';
 import workLifeBalanceAnimation from '@/public/Work and life balance.json';
 import chatWithUsAnimation from '@/public/chat-with-us.json';
