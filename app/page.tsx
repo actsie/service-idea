@@ -76,7 +76,7 @@ export default function Home() {
       </main>
 
       {/* Trust Bar */}
-      <section className="bg-white dark:bg-neutral-950 pb-16 relative">
+      <section className="bg-white dark:bg-neutral-950 pb-16 relative overflow-x-hidden">
         <style jsx>{`
           @keyframes marquee {
             0% {
@@ -100,7 +100,7 @@ export default function Home() {
                 Trusted by founders at
               </p>
             </div>
-            <div className="py-6 md:w-[calc(100%-11rem)] relative overflow-hidden marquee-container">
+            <div className="py-6 w-full md:w-[calc(100%-11rem)] relative overflow-hidden marquee-container">
               {/* Fade mask on left edge near separator */}
               <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white dark:from-neutral-950 to-transparent z-10 pointer-events-none"></div>
               {/* Fade mask on right edge */}
@@ -132,7 +132,7 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-16">
+      <footer className="bg-white dark:bg-gray-800 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-center sm:text-left text-gray-600 dark:text-gray-400 text-sm">
