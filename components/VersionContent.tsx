@@ -55,6 +55,25 @@ interface ContentData {
   finalCta: FinalCtaContent;
 }
 
+const highlightSavedText = (description: string) => {
+  const regex = /(\(saved [^)]+\))/;
+  const parts = description.split(regex);
+
+  return parts.map((part, index) => {
+    if (part.match(regex)) {
+      return (
+        <React.Fragment key={index}>
+          <br />
+          <span className="saved-highlight px-2 py-0.5 font-medium text-gray-300/80 transition-all duration-200">
+            {part}
+          </span>
+        </React.Fragment>
+      );
+    }
+    return <span key={index}>{part}</span>;
+  });
+};
+
 const getIconSvg = (iconType: string) => {
   const icons: Record<string, React.ReactElement> = {
     mail: (
@@ -121,7 +140,7 @@ export default function VersionContent({ version }: VersionContentProps) {
           <div className="flex flex-col items-center gap-2 mt-10">
             <button
               className="inline-flex border border-transparent transition-colors items-center justify-center rounded-md bg-neutral-900 px-8 py-3 font-medium text-neutral-100"
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#191046')}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#5E50A0')}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '')}
             >
               {content.hero.cta}
@@ -267,6 +286,12 @@ export default function VersionContent({ version }: VersionContentProps) {
       {/* Examples Section (if exists) */}
       {content.examples && (
         <section className="relative">
+          <style dangerouslySetInnerHTML={{__html: `
+            .group:hover .saved-highlight {
+              background-image: linear-gradient(to right, #fdf6ef, #fcf3fa, #f9f1fc, #f4eefc) !important;
+              color: #111827 !important;
+            }
+          `}} />
           {/* Circuit Board Background */}
           <div
             className="absolute inset-0 pointer-events-none"
@@ -310,7 +335,12 @@ export default function VersionContent({ version }: VersionContentProps) {
           />
 
           <h3 className="text-3xl font-medium text-gray-900 dark:text-gray-100 mb-12 text-center leading-tight relative z-10">
-            {content.examples.title}
+            5 Example <span
+              className="px-3 py-1 font-bold"
+              style={{
+                backgroundImage: 'linear-gradient(to right, #fdf6ef, #fcf3fa, #f9f1fc, #f4eefc)'
+              }}
+            >Automations</span> We've Built
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
             {content.examples.items.map((item, index) => (
@@ -347,15 +377,15 @@ export default function VersionContent({ version }: VersionContentProps) {
 
                       {/* Title */}
                       <div className="mb-4 transform group-hover:scale-105 transition-transform duration-200">
-                        <p className="text-xl font-bold bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">
+                        <p className="text-xl font-medium leading-tight text-white">
                           {item.title}
                         </p>
                       </div>
 
                       {/* Description */}
                       <div className="space-y-1 max-w-sm">
-                        <p className="text-gray-300 text-sm leading-relaxed transform group-hover:text-gray-200 transition-colors duration-200">
-                          {item.description}
+                        <p className="text-sm leading-relaxed text-gray-300/80 transform group-hover:text-gray-200/90 transition-colors duration-200">
+                          {highlightSavedText(item.description)}
                         </p>
                       </div>
                     </div>
@@ -385,7 +415,19 @@ export default function VersionContent({ version }: VersionContentProps) {
                 />
               </div>
               <h3 className="text-3xl font-medium text-gray-900 dark:text-gray-100 leading-tight">
-                {content.finalCta.title}
+                {content.finalCta.title === 'See how much you could save' ? (
+                  <>
+                    See how much you could{' '}
+                    <span
+                      className="px-1 py-1 font-bold"
+                      style={{
+                        backgroundImage: 'linear-gradient(to right, #fdf6ef, #fcf3fa, #f9f1fc, #f4eefc)'
+                      }}
+                    >save</span>
+                  </>
+                ) : (
+                  content.finalCta.title
+                )}
               </h3>
             </div>
             <p className="text-lg text-gray-700/80 dark:text-neutral-300/80">

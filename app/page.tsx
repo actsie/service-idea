@@ -48,7 +48,7 @@ export default function Home() {
               <button
                 type="button"
                 className="inline-flex border border-transparent transition-colors items-center justify-center rounded-md bg-neutral-900 px-8 py-3 font-medium text-neutral-100"
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#191046')}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#5E50A0')}
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '')}
               >
                 Book Free Call

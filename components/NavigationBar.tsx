@@ -29,7 +29,7 @@ export default function NavigationBar({ currentVersion, onVersionChange }: Navig
           <div className="flex items-center">
             <button
               className="px-4 py-2 bg-neutral-900 text-white text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#191046')}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#5E50A0')}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '')}
             >
               Book Call
