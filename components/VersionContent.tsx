@@ -149,21 +149,6 @@ export default function VersionContent({ version }: VersionContentProps) {
         </div>
       </section>
 
-      {/* Logo Trust Bar - Hide for v2 since it's in main hero */}
-      {version !== 'v2' && (
-        <section className="py-8 border-y border-gray-200 dark:border-gray-700">
-          <div className="flex flex-wrap items-center justify-center gap-8 text-center">
-            <span className="text-sm text-gray-700/80 dark:text-neutral-300/80 w-full mb-2">Trusted by founders at:</span>
-            <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
-              <div className="px-6 py-3 text-gray-700 dark:text-gray-300 font-medium">TechCo</div>
-              <div className="px-6 py-3 text-gray-700 dark:text-gray-300 font-medium">DataFlow</div>
-              <div className="px-6 py-3 text-gray-700 dark:text-gray-300 font-medium">SaaS Inc</div>
-              <div className="px-6 py-3 text-gray-700 dark:text-gray-300 font-medium">Startup Labs</div>
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Problem Section (if exists) */}
       {content.problem && (
         <section className="max-w-4xl mx-auto">
@@ -430,7 +415,7 @@ export default function VersionContent({ version }: VersionContentProps) {
                 )}
               </h3>
             </div>
-            <p className="text-lg text-gray-700/80 dark:text-neutral-300/80">
+            <p className="text-lg text-gray-700/80 dark:text-neutral-300/80 text-center">
               Book a free 15-minute consultation to discuss your automation needs and see how much time and money you could save.
             </p>
 
@@ -590,7 +575,7 @@ export default function VersionContent({ version }: VersionContentProps) {
                   </div>
 
                   {/* Text */}
-                  <div className="flex flex-col justify-center">
+                  <div className="flex flex-col justify-center text-left">
                     <p className="m-0 font-bold text-base" style={{ color: '#5E50A0', lineHeight: '1.2' }}>
                       Risk-Free Start
                     </p>

@@ -75,57 +75,6 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Trust Bar */}
-      <section className="bg-white dark:bg-neutral-950 pb-16 relative overflow-x-hidden">
-        <style jsx>{`
-          @keyframes marquee {
-            0% {
-              transform: translateX(0);
-            }
-            100% {
-              transform: translateX(-50%);
-            }
-          }
-          .marquee-container:hover .marquee-content {
-            animation-play-state: paused;
-          }
-          .marquee-content {
-            animation: marquee 20s linear infinite;
-          }
-        `}</style>
-        <div className="px-6 group relative m-auto max-w-6xl">
-          <div className="items-center md:flex-row flex flex-col">
-            <div className="md:max-w-44 md:border-r md:border-black/10 md:pr-6 inline dark:md:border-white/15">
-              <p className="text-sm text-gray-600 text-end dark:text-neutral-400">
-                Trusted by founders at
-              </p>
-            </div>
-            <div className="py-6 w-full md:w-[calc(100%-11rem)] relative overflow-hidden marquee-container">
-              {/* Fade mask on left edge near separator */}
-              <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white dark:from-neutral-950 to-transparent z-10 pointer-events-none"></div>
-              {/* Fade mask on right edge */}
-              <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white dark:from-neutral-950 to-transparent z-10 pointer-events-none"></div>
-
-              <div className="flex gap-20 marquee-content">
-                <div className="flex shrink-0 gap-20">
-                  <div className="px-6 py-3 text-gray-700 dark:text-gray-300 font-semibold">TechCo</div>
-                  <div className="px-6 py-3 text-gray-700 dark:text-gray-300 font-semibold">DataFlow</div>
-                  <div className="px-6 py-3 text-gray-700 dark:text-gray-300 font-semibold">SaaS Inc</div>
-                  <div className="px-6 py-3 text-gray-700 dark:text-gray-300 font-semibold">Startup Labs</div>
-                </div>
-                {/* Duplicate for seamless loop */}
-                <div className="flex shrink-0 gap-20">
-                  <div className="px-6 py-3 text-gray-700 dark:text-gray-300 font-semibold">TechCo</div>
-                  <div className="px-6 py-3 text-gray-700 dark:text-gray-300 font-semibold">DataFlow</div>
-                  <div className="px-6 py-3 text-gray-700 dark:text-gray-300 font-semibold">SaaS Inc</div>
-                  <div className="px-6 py-3 text-gray-700 dark:text-gray-300 font-semibold">Startup Labs</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <VersionContent version={currentVersion} />
