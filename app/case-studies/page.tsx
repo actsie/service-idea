@@ -203,14 +203,8 @@ export default function CaseStudiesPage() {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {caseStudies.map((study, index) => {
-              const CardWrapper = study.available ? Link : 'div';
-
-              return (
-                <CardWrapper
-                  key={index}
-                  href={study.available ? study.slug : undefined}
-                  className={`case-study-card group ${study.available ? 'cursor-pointer' : 'cursor-not-allowed opacity-75'} transform transition-all duration-200 ${study.available ? 'hover:scale-105 hover:-rotate-1' : ''}`}
-                >
+              const CardContent = (
+                <div className={`case-study-card group ${study.available ? 'cursor-pointer' : 'cursor-not-allowed opacity-75'} transform transition-all duration-200 ${study.available ? 'hover:scale-105 hover:-rotate-1' : ''}`}>
                   <div className="text-white rounded-3xl border border-white/10 bg-gradient-to-br from-[#010101] via-[#090909] to-[#010101] duration-200 z-10 relative backdrop-blur-xl hover:border-white/25 overflow-hidden w-full h-full">
                     {/* Animated Background Effects */}
                     <div className="absolute inset-0 z-0 overflow-hidden">
@@ -284,7 +278,17 @@ export default function CaseStudiesPage() {
                       </>
                     )}
                   </div>
-                </CardWrapper>
+                </div>
+              );
+
+              return study.available ? (
+                <Link key={index} href={study.slug}>
+                  {CardContent}
+                </Link>
+              ) : (
+                <div key={index}>
+                  {CardContent}
+                </div>
               );
             })}
           </div>
