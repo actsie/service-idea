@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import Lottie from 'lottie-react';
 import workLifeBalanceAnimation from '@/public/Work and life balance.json';
 import chatWithUsAnimation from '@/public/chat-with-us.json';
@@ -350,12 +351,17 @@ export default function VersionContent({ version }: VersionContentProps) {
             >Automations</span> We've Built
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-            {content.examples.items.map((item, index) => (
-              <div
-                key={index}
-                className="group cursor-pointer transform transition-all duration-200 hover:scale-105 hover:-rotate-1"
-              >
-                <div className="text-white rounded-3xl border border-white/10 bg-gradient-to-br from-[#010101] via-[#090909] to-[#010101] duration-200 z-10 relative backdrop-blur-xl hover:border-white/25 overflow-hidden w-full">
+            {content.examples.items.map((item, index) => {
+              const isSalesOutreach = index === 0;
+              const CardWrapper = isSalesOutreach ? Link : 'div';
+
+              return (
+                <CardWrapper
+                  key={index}
+                  href={isSalesOutreach ? '/case-studies/sales-outreach' : undefined}
+                  className="group cursor-pointer transform transition-all duration-200 hover:scale-105 hover:-rotate-1"
+                >
+                  <div className="text-white rounded-3xl border border-white/10 bg-gradient-to-br from-[#010101] via-[#090909] to-[#010101] duration-200 z-10 relative backdrop-blur-xl hover:border-white/25 overflow-hidden w-full">
                   {/* Animated Background Effects */}
                   <div className="absolute inset-0 z-0 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-white/10 opacity-40 group-hover:opacity-60 transition-opacity duration-200" />
@@ -402,8 +408,9 @@ export default function VersionContent({ version }: VersionContentProps) {
                   <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-white/10 to-transparent rounded-br-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                   <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-white/10 to-transparent rounded-tl-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                 </div>
-              </div>
-            ))}
+              </CardWrapper>
+              );
+            })}
           </div>
         </section>
       )}
