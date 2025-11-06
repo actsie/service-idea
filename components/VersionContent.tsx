@@ -206,18 +206,40 @@ export default function VersionContent({ version }: VersionContentProps) {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 {/* Left Column - Features List */}
                 <div className="space-y-12">
-                  {content.features.items.map((item, index) => (
-                    <div key={index} className="relative">
-                      <div>
-                        <h4 className="mb-2 text-xl font-medium text-gray-900">
-                          {item.title}
-                        </h4>
-                        <p className="text-lg text-gray-700/80">
-                          {item.description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                  {content.features.items.map((item, index) => {
+                    const isSalesItem = index === 0 && version === 'v2';
+                    const ItemWrapper = isSalesItem ? 'a' : 'div';
+
+                    return (
+                      <ItemWrapper
+                        key={index}
+                        href={isSalesItem ? '/case-studies/sales-outreach' : undefined}
+                        className={`relative block group ${isSalesItem ? 'cursor-pointer' : ''}`}
+                      >
+                        <div>
+                          <h4 className="mb-2 text-xl font-medium text-gray-900">
+                            {item.title}
+                          </h4>
+                          <p className="text-lg text-gray-700/80">
+                            {item.description}
+                            {isSalesItem && (
+                              <span className="inline-flex items-center gap-1 text-xs text-gray-600 ml-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1">
+                                <span>Learn more</span>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  className="w-3 h-3 transform transition-transform duration-300 group-hover:translate-x-1"
+                                >
+                                  <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
+                                </svg>
+                              </span>
+                            )}
+                          </p>
+                        </div>
+                      </ItemWrapper>
+                    );
+                  })}
                 </div>
 
                 {/* Right Column - Lottie Animation */}
@@ -679,8 +701,8 @@ function getContentForVersion(version: string): ContentData {
         items: [
           {
             icon: 'mail',
-            title: 'Sales: 12hrs → 1.5hrs',
-            description: 'Automated outreach with maintained personalization quality',
+            title: 'Sales Outreach: 12hrs → 45min per week',
+            description: 'Scale to 100+ personalized emails/week with 1-click capture + AI',
           },
           {
             icon: 'users',
