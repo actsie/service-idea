@@ -713,7 +713,7 @@ function getContentForVersion(version: string): ContentData {
         items: [
           {
             icon: 'mail',
-            title: 'Sales Outreach: 12hrs → 45min per week',
+            title: 'Sales Outreach: 12hrs → 3hrs per week',
             description: 'Scale to 100+ personalized emails/week with 1-click capture + AI',
           },
           {

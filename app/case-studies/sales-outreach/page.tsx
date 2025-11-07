@@ -56,7 +56,7 @@ export default function SalesOutreachCaseStudy() {
             Sales Outreach Automation
           </h1>
           <p className="text-xl text-gray-700/80 dark:text-neutral-300/80 max-w-3xl">
-            How we helped a B2B SaaS company reduce sales outreach time from 12 hours to 45 minutes per week while processing 150+ leads
+            An AI automation that cuts sales outreach from 12 hours to 3 hours weekly while handling 150+ leads
           </p>
         </div>
       </section>
@@ -72,7 +72,7 @@ export default function SalesOutreachCaseStudy() {
           >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
               <div>
-                <div className="text-3xl font-semibold text-gray-900 mb-2">94%</div>
+                <div className="text-3xl font-semibold text-gray-900 mb-2">75%</div>
                 <div className="text-sm text-gray-700/80">Time Saved</div>
               </div>
               <div>
@@ -198,7 +198,7 @@ export default function SalesOutreachCaseStudy() {
                 <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg p-6">
                   <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">After</h3>
                   <ul className="space-y-2 text-gray-700/80 dark:text-neutral-300/80">
-                    <li>45 minutes/week on outreach</li>
+                    <li>3 hours/week on outreach</li>
                     <li>150+ personalized emails per week</li>
                     <li>Truly personalized messages</li>
                     <li>3x higher response rate</li>
