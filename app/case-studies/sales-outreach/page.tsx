@@ -2,14 +2,89 @@
 
 import Link from 'next/link';
 import Lottie from 'lottie-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import chatWithUsAnimation from '@/public/chat-with-us.json';
+import workingAnimation from '@/public/working.json';
+import inboxAnimation from '@/public/inbox.json';
 
 export default function SalesOutreachCaseStudy() {
   const [isTechArchOpen, setIsTechArchOpen] = useState(false);
+  const [showStickyNav, setShowStickyNav] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show sticky nav after scrolling past hero section (~400px)
+      setShowStickyNav(window.scrollY > 400);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToCalendly = () => {
+    const calendlySection = document.querySelector('#calendly-section');
+    if (calendlySection) {
+      calendlySection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-950 text-gray-800 dark:text-neutral-100">
+      {/* Sticky Navigation Bar */}
+      <div
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-lg ${
+          showStickyNav ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
+          <div className="flex items-center justify-between gap-4">
+            {/* Left: Breadcrumb */}
+            <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm overflow-hidden">
+              <Link
+                href="/"
+                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors whitespace-nowrap"
+              >
+                Home
+              </Link>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-600 flex-shrink-0"
+              >
+                <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
+              </svg>
+              <Link
+                href="/case-studies"
+                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors whitespace-nowrap hidden sm:inline"
+              >
+                Case Studies
+              </Link>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-600 flex-shrink-0 hidden sm:block"
+              >
+                <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
+              </svg>
+              <span className="text-gray-900 dark:text-gray-100 font-medium whitespace-nowrap truncate">Sales Outreach</span>
+            </div>
+
+            {/* Right: Book Call Button */}
+            <button
+              type="button"
+              onClick={scrollToCalendly}
+              className="inline-flex border border-transparent transition-colors items-center justify-center rounded-md bg-neutral-900 px-4 py-2 font-medium text-neutral-100 text-sm whitespace-nowrap flex-shrink-0"
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#5E50A0')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '')}
+            >
+              Book Free Call
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* Breadcrumb Navigation */}
       <nav className="pt-4 px-6">
         <div className="max-w-5xl mx-auto py-4">
@@ -198,7 +273,6 @@ export default function SalesOutreachCaseStudy() {
                     <li><strong>Unified dashboard</strong>: All prospects in one clean table view</li>
                     <li><strong>One-click AI drafts</strong>: Click "Generate Draft" and get a personalized email in seconds—no templates, no copy-paste</li>
                     <li><strong>Context-aware AI</strong>: Import notes from your Google Sheet that give the AI context for generating personalized emails</li>
-                    <li><strong>Real-time status</strong>: Instantly see who's been contacted, who replied, who's still cold</li>
                     <li><strong>Smart caching</strong>: 5-minute data cache reduces API costs by 60% while keeping information fresh</li>
                   </ul>
                 </div>
@@ -215,18 +289,41 @@ export default function SalesOutreachCaseStudy() {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg p-6">
-                  <p className="text-gray-900 dark:text-gray-100 font-semibold mb-3">The workflow:</p>
-                  <ol className="space-y-2 text-gray-700/80 dark:text-neutral-300/80 list-decimal pl-6">
-                    <li>Open Prospects tab → see all new leads</li>
-                    <li>Click "Generate Draft" → AI creates personalized email</li>
-                    <li>Review, edit if needed, click "Send"</li>
-                    <li>Prospect disappears from view (optimistic UI update)</li>
-                    <li>Three follow-up drafts auto-generate and queue for review</li>
-                  </ol>
-                  <p className="text-gray-900 dark:text-gray-100 font-bold mt-4">
-                    From 30 minutes to 5 minutes per prospect.
-                  </p>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                  {/* Left: Workflow Text */}
+                  <div>
+                    <p className="text-gray-900 dark:text-gray-100 font-semibold mb-3">
+                      <span
+                        className="px-2 py-1"
+                        style={{
+                          backgroundImage: 'linear-gradient(to right, #fdf6ef, #fcf3fa, #f9f1fc, #f4eefc)'
+                        }}
+                      >
+                        The workflow:
+                      </span>
+                    </p>
+                    <ol className="space-y-2 text-gray-700/80 dark:text-neutral-300/80 list-decimal pl-6">
+                      <li>Open Prospects tab → see all new leads</li>
+                      <li>Click "Generate Draft" → AI creates personalized email</li>
+                      <li>Review, edit if needed, click "Send"</li>
+                      <li>Prospect disappears from view (optimistic UI update)</li>
+                      <li>Three follow-up drafts auto-generate and queue for review</li>
+                    </ol>
+                    <p className="text-gray-900 dark:text-gray-100 font-bold mt-4">
+                      From 30 minutes to 5 minutes per prospect.
+                    </p>
+                  </div>
+
+                  {/* Right: Lottie Animation */}
+                  <div className="flex items-center justify-center">
+                    <div className="w-64 lg:w-80">
+                      <Lottie
+                        animationData={inboxAnimation}
+                        loop={true}
+                        autoplay={true}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -298,18 +395,41 @@ export default function SalesOutreachCaseStudy() {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg p-6">
-                  <p className="text-gray-900 dark:text-gray-100 font-semibold mb-3">The workflow:</p>
-                  <ol className="space-y-2 text-gray-700/80 dark:text-neutral-300/80 list-decimal pl-6">
-                    <li>Check "Pending Review" tab → see 5 drafts due today</li>
-                    <li>Click prospect → see all 3 follow-ups in thread view</li>
-                    <li>Approve FU#1, regenerate FU#2 (want different angle), skip FU#3</li>
-                    <li>Drafts update instantly (optimistic UI)</li>
-                    <li>Approved drafts send on schedule automatically</li>
-                  </ol>
-                  <p className="text-gray-900 dark:text-gray-100 font-bold mt-4">
-                    From 15-20 minutes per follow-up to 2 minutes for batch review.
-                  </p>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                  {/* Left: Workflow Text */}
+                  <div>
+                    <p className="text-gray-900 dark:text-gray-100 font-semibold mb-3">
+                      <span
+                        className="px-2 py-1"
+                        style={{
+                          backgroundImage: 'linear-gradient(to right, #fdf6ef, #fcf3fa, #f9f1fc, #f4eefc)'
+                        }}
+                      >
+                        The workflow:
+                      </span>
+                    </p>
+                    <ol className="space-y-2 text-gray-700/80 dark:text-neutral-300/80 list-decimal pl-6">
+                      <li>Check "Pending Review" tab → see 5 drafts due today</li>
+                      <li>Click prospect → see all 3 follow-ups in thread view</li>
+                      <li>Approve FU#1, regenerate FU#2 (want different angle), skip FU#3</li>
+                      <li>Drafts update instantly (optimistic UI)</li>
+                      <li>Approved drafts send on schedule automatically</li>
+                    </ol>
+                    <p className="text-gray-900 dark:text-gray-100 font-bold mt-4">
+                      From 15-20 minutes per follow-up to 2 minutes for batch review.
+                    </p>
+                  </div>
+
+                  {/* Right: Lottie Animation */}
+                  <div className="flex items-center justify-center">
+                    <div className="w-64 lg:w-80">
+                      <Lottie
+                        animationData={workingAnimation}
+                        loop={true}
+                        autoplay={true}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -680,116 +800,11 @@ export default function SalesOutreachCaseStudy() {
               </div>
             </div>
           </div>
-
-          {/* Screenshots Gallery */}
-          <div>
-            <h2 className="text-3xl font-medium mb-8">See It in Action</h2>
-
-            {/* Prospects Tab Features */}
-            <div className="mb-12">
-              <h3 className="text-2xl font-medium mb-6">
-                <span
-                  className="px-3 py-1"
-                  style={{
-                    backgroundImage: 'linear-gradient(to right, #fdf6ef, #fcf3fa, #f9f1fc, #f4eefc)'
-                  }}
-                >
-                  Prospects Tab Features
-                </span>
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Prospects Tab Main View */}
-                <div className="group">
-                  <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.02]">
-                    <img
-                      src="/ProspectsTab-MainView.png"
-                      alt="Prospects Tab - Main View"
-                      className="w-full h-auto"
-                    />
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-3 px-2">
-                    <strong>Main Dashboard:</strong> Manage all cold outreach prospects in one unified dashboard. Status tracking, contextual notes, and one-click AI draft generation eliminate the need for spreadsheets and constant context switching.
-                  </p>
-                </div>
-
-                {/* Prospects Tab Draft Modal */}
-                <div className="group">
-                  <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.02]">
-                    <img
-                      src="/ProspectsTab-DraftModal.png"
-                      alt="Prospects Tab - Draft Modal"
-                      className="w-full h-auto"
-                    />
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-3 px-2">
-                    <strong>AI Draft Generation:</strong> Generate personalized email drafts in seconds with AI. Review, edit, and send—then watch as three follow-up drafts auto-queue for review.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Follow-ups Tab Features */}
-            <div>
-              <h3 className="text-2xl font-medium mb-6">
-                <span
-                  className="px-3 py-1"
-                  style={{
-                    backgroundImage: 'linear-gradient(to right, #fdf6ef, #fcf3fa, #f9f1fc, #f4eefc)'
-                  }}
-                >
-                  Follow-ups Tab Features
-                </span>
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Follow-ups Tab Pending Review */}
-                <div className="group">
-                  <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.02]">
-                    <img
-                      src="/Follow-upsTab-PendingReview.png"
-                      alt="Follow-ups Tab - Pending Review"
-                      className="w-full h-auto"
-                    />
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-3 px-2">
-                    <strong>Batch Review:</strong> Batch review follow-up drafts with urgency filters showing what's due today, overdue, or needs attention. Approve, skip, or regenerate with one click.
-                  </p>
-                </div>
-
-                {/* Follow-ups Tab Thread View */}
-                <div className="group">
-                  <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.02]">
-                    <img
-                      src="/Follow-upsTab-ThreadView.png"
-                      alt="Follow-ups Tab - Thread View"
-                      className="w-full h-auto"
-                    />
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-3 px-2">
-                    <strong>Full Thread Preview:</strong> See the entire email sequence before it sends. All three follow-ups (Day 3, 7, 14) in one view for full context and control.
-                  </p>
-                </div>
-
-                {/* Follow-ups Tab Sent Emails */}
-                <div className="group md:col-span-2">
-                  <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.02] max-w-2xl mx-auto">
-                    <img
-                      src="/Follow-upsTab-SentEmails.png"
-                      alt="Follow-ups Tab - Sent Emails"
-                      className="w-full h-auto"
-                    />
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-3 px-2 max-w-2xl mx-auto">
-                    <strong>Conversation Tracking:</strong> Track every conversation with full email thread visibility. Know exactly which stage each prospect is at (FU#1, FU#2, FU#3) and see replies instantly.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 px-6 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+      <section id="calendly-section" className="py-12 px-6 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - CTA Text */}

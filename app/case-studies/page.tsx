@@ -59,9 +59,9 @@ interface CaseStudy {
 const caseStudies: CaseStudy[] = [
   {
     icon: 'mail',
-    title: 'Sales Outreach Engine',
-    description: 'Auto-personalized emails using prospect data',
-    timeSaved: 'Saved 10+ hrs/week',
+    title: 'GTM Operations Console',
+    description: 'Unified prospect & follow-up management system',
+    timeSaved: '90% time reduction on follow-ups',
     slug: '/case-studies/sales-outreach',
     available: true,
   },

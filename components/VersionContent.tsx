@@ -713,8 +713,8 @@ function getContentForVersion(version: string): ContentData {
         items: [
           {
             icon: 'mail',
-            title: 'Sales Outreach: 12hrs → 3hrs per week',
-            description: 'Scale to 100+ personalized emails/week with 1-click capture + AI',
+            title: 'GTM Operations Console',
+            description: 'Unified prospect & follow-up automation with 90% time reduction',
           },
           {
             icon: 'users',
@@ -743,8 +743,8 @@ function getContentForVersion(version: string): ContentData {
         items: [
           {
             icon: 'mail',
-            title: 'Sales outreach engine',
-            description: 'Auto-personalized emails using prospect data (saved 10 hrs/week)',
+            title: 'GTM Operations Console',
+            description: 'Unified prospect & follow-up management with 90% time reduction on follow-ups',
           },
           {
             icon: 'users',
@@ -883,8 +883,8 @@ function getContentForVersion(version: string): ContentData {
         items: [
           {
             icon: 'mail',
-            title: 'Sales outreach engine',
-            description: 'Auto-personalized emails using prospect data (saved 10 hrs/week)',
+            title: 'GTM Operations Console',
+            description: 'Unified prospect & follow-up management with 90% time reduction on follow-ups',
           },
           {
             icon: 'users',
