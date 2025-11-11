@@ -4,8 +4,52 @@ import { useState } from 'react';
 import NavigationBar from '@/components/NavigationBar';
 import VersionContent from '@/components/VersionContent';
 
+interface HeroData {
+  badge: string;
+  title: string;
+  subtitle: string;
+  primaryCta: string;
+  secondaryCta: string;
+  stats: Array<{
+    value: string;
+    label: string;
+  }>;
+}
+
+function getHeroData(version: string): HeroData {
+  const heroData: Record<string, HeroData> = {
+    v6: {
+      badge: 'Fractional Founder Partner',
+      title: 'Your on-call cofounder to turn clarity into action',
+      subtitle: 'Offload what slows you down. Prototype what\'s unclear. Automate what\'s repetitive.',
+      primaryCta: 'Book Free Founder Audit',
+      secondaryCta: 'Learn More',
+      stats: [
+        { value: '$100-$150', label: 'Hourly Rate' },
+        { value: '20 hours', label: 'Trial Period' },
+        { value: '1 Week', label: 'MVP Turnaround' },
+      ],
+    },
+    default: {
+      badge: 'AI Automation',
+      title: 'Stop hiring people to solve problems AI can handle in 10 minutes',
+      subtitle: 'Your fractional AI Operations Lead. We find the bottlenecks, build the solutions, and train your team.',
+      primaryCta: 'Book Free Call',
+      secondaryCta: 'Learn More',
+      stats: [
+        { value: '$80K-$120K', label: 'Saved vs. Full-time' },
+        { value: '20-30 hrs', label: 'Saved Per Week' },
+        { value: '2 Weeks', label: 'Implementation' },
+      ],
+    },
+  };
+
+  return heroData[version] || heroData.default;
+}
+
 export default function Home() {
   const [currentVersion, setCurrentVersion] = useState('v2');
+  const heroData = getHeroData(currentVersion);
 
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-950 text-gray-800 dark:text-neutral-100 relative isolate antialiased">
@@ -37,11 +81,11 @@ export default function Home() {
                 >
                   <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 22.5l-.394-1.933a2.25 2.25 0 00-1.423-1.423L12.75 18.75l1.933-.394a2.25 2.25 0 001.423-1.423L16.5 15l.394 1.933a2.25 2.25 0 001.423 1.423l1.933.394-1.933.394a2.25 2.25 0 00-1.423 1.423z" />
                 </svg>
-                <span className="text-gray-700 dark:text-neutral-300">AI Automation</span>
+                <span className="text-gray-700 dark:text-neutral-300">{heroData.badge}</span>
               </div>
-              <p className="text-4xl font-medium leading-tight lg:text-6xl">Stop hiring people to solve problems AI can handle in 10 minutes</p>
+              <p className="text-4xl font-medium leading-tight lg:text-6xl">{heroData.title}</p>
               <p className="text-lg text-gray-700/80 dark:text-neutral-300/80 max-w-2xl mx-auto">
-                Your fractional AI Operations Lead. We find the bottlenecks, build the solutions, and train your team.
+                {heroData.subtitle}
               </p>
             </div>
             <div className="sm:flex-row flex flex-col gap-4 justify-center">
@@ -51,25 +95,19 @@ export default function Home() {
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#5E50A0')}
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '')}
               >
-                Book Free Call
+                {heroData.primaryCta}
               </button>
               <button type="button" className="inline-flex border border-zinc-300/70 dark:border-white/20 transition-colors hover:bg-black/5 dark:hover:bg-white/10 dark:bg-white/10 items-center justify-center rounded-md bg-white/70 px-8 py-3 font-medium">
-                Learn More
+                {heroData.secondaryCta}
               </button>
             </div>
             <div className="items-center pt-12 flex flex-wrap justify-center gap-12 lg:gap-16">
-              <div>
-                <div className="text-2xl font-semibold">$80K-$120K</div>
-                <div className="text-sm text-gray-700/80 dark:text-neutral-300/80">Saved vs. Full-time</div>
-              </div>
-              <div>
-                <div className="text-2xl font-semibold">20-30 hrs</div>
-                <div className="text-sm text-gray-700/80 dark:text-neutral-300/80">Saved Per Week</div>
-              </div>
-              <div>
-                <div className="text-2xl font-semibold">2 Weeks</div>
-                <div className="text-sm text-gray-700/80 dark:text-neutral-300/80">Implementation</div>
-              </div>
+              {heroData.stats.map((stat, index) => (
+                <div key={index}>
+                  <div className="text-2xl font-semibold">{stat.value}</div>
+                  <div className="text-sm text-gray-700/80 dark:text-neutral-300/80">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

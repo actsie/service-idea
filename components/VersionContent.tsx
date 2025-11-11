@@ -47,12 +47,18 @@ interface FinalCtaContent {
   cta: string;
 }
 
+interface AboutContent {
+  title: string;
+  paragraphs: string[];
+}
+
 interface ContentData {
   hero: HeroContent;
   problem?: ProblemContent;
   features: FeaturesContent;
   stats?: StatsContent;
   examples?: FeaturesContent;
+  about?: AboutContent;
   finalCta: FinalCtaContent;
 }
 
@@ -69,6 +75,45 @@ const highlightSavedText = (description: string) => {
             {part}
           </span>
         </React.Fragment>
+      );
+    }
+    return <span key={index}>{part}</span>;
+  });
+};
+
+const highlightAchievements = (text: string) => {
+  const highlightTerms = [
+    'Mai',
+    '1M+ users',
+    '$2M+ revenue',
+    '$3.4M',
+    'Senior Software Engineer',
+    '10,000 translation devices',
+    'HeyMint',
+    'MasterCard',
+    'Ubisoft',
+    'Alchemy',
+    'Gusto',
+    'Pawgrammer.com',
+  ];
+
+  // Create a regex that matches any of the terms, escaping special characters
+  const escapedTerms = highlightTerms.map(term => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  const regex = new RegExp(`(${escapedTerms.join('|')})`, 'g');
+  const parts = text.split(regex);
+
+  return parts.map((part, index) => {
+    if (highlightTerms.includes(part)) {
+      return (
+        <span
+          key={index}
+          className="px-2 py-0.5 font-semibold"
+          style={{
+            backgroundImage: 'linear-gradient(to right, #fdf6ef, #fcf3fa, #f9f1fc, #f4eefc)'
+          }}
+        >
+          {part}
+        </span>
       );
     }
     return <span key={index}>{part}</span>;
@@ -416,6 +461,22 @@ export default function VersionContent({ version }: VersionContentProps) {
                 </div>
               );
             })}
+          </div>
+        </section>
+      )}
+
+      {/* About Section (if exists) */}
+      {content.about && (
+        <section className="py-16 max-w-4xl mx-auto">
+          <h3 className="text-3xl font-medium text-gray-900 dark:text-gray-100 mb-8 text-center leading-tight">
+            {content.about.title}
+          </h3>
+          <div className="space-y-4">
+            {content.about.paragraphs.map((paragraph, index) => (
+              <p key={index} className="text-lg text-gray-700/80 dark:text-neutral-300/80 leading-relaxed">
+                {highlightAchievements(paragraph)}
+              </p>
+            ))}
           </div>
         </section>
       )}
@@ -911,6 +972,104 @@ function getContentForVersion(version: string): ContentData {
       finalCta: {
         title: 'Start Saving Time Today',
         cta: 'Free Consultation Call',
+      },
+    },
+    v6: {
+      hero: {
+        title: 'Your Fractional Founder Partner',
+        subtitle: 'Offload what slows you down. Prototype what\'s unclear. Automate what\'s repetitive.',
+        cta: 'Book a Free Founder Audit →',
+      },
+      problem: {
+        title: 'What I Do',
+        points: [
+          'Offload Anything You Don\'t Have Time For - Research, ops cleanup, pitch deck polish, investor update doc, hiring coordination, team offsite/activity planning — all handled.',
+          'Prototype Vague Ideas Quickly - Got an idea that\'s not yet scoped? I\'ll turn it into a working draft, build MVP, set up analytics, come up with GTM and run experiments.',
+          'Bring AI Into Your Workflow for Cost Saving - I analyze your marketing, sales, or operations workflow, then design and implement automations or GPT/Claude-based tools that save time and cost.',
+        ],
+      },
+      stats: {
+        title: 'How It Works',
+        items: [
+          { value: 'Discovery', label: 'Free call to discuss what you need help with and scope the work' },
+          { value: '20 hours', label: 'Trial week to see how well we work together' },
+          { value: '$100-$150', label: 'Hourly rate depending on tasks' },
+        ],
+      },
+      features: {
+        title: 'Example Work You Can Request',
+        items: [
+          {
+            icon: 'rocket',
+            title: 'Build MVP in a Week',
+            description: 'Validate with 100 users before hiring engineers',
+          },
+          {
+            icon: 'document',
+            title: 'AI-Powered Experiments',
+            description: 'Design and launch pricing experiments that drive conversion lift',
+          },
+          {
+            icon: 'mail',
+            title: 'Workflow Automation',
+            description: 'Audit and automate weekly reporting and outreach',
+          },
+          {
+            icon: 'chat',
+            title: 'Investor Updates',
+            description: 'AI-powered summaries reducing prep time from 4 hours to 30 minutes',
+          },
+          {
+            icon: 'users',
+            title: 'Content Generation',
+            description: 'GPT-based tools for LinkedIn & newsletter posts',
+          },
+        ],
+      },
+      examples: {
+        title: 'Example Projects',
+        items: [
+          {
+            icon: 'rocket',
+            title: 'MVP Development',
+            description: 'Built product MVP in one week, enabling validation with 100 users before hiring engineers',
+          },
+          {
+            icon: 'document',
+            title: 'AI Pricing Experiment',
+            description: 'Designed and launched AI-powered pricing test (saved 20 hrs implementation)',
+          },
+          {
+            icon: 'mail',
+            title: 'Workflow Automation',
+            description: 'Automated weekly reporting and outreach (saved 15 hrs/week)',
+          },
+          {
+            icon: 'chat',
+            title: 'Investor Updates',
+            description: 'AI-powered summaries reduced prep from 4 hours to 30 minutes (saved 3.5 hrs/update)',
+          },
+          {
+            icon: 'users',
+            title: 'Landing Page Rebuild',
+            description: 'Rebuilt landing pages with no-code AI, delivery time from 3 weeks to 3 days (saved 18 days)',
+          },
+        ],
+      },
+      about: {
+        title: 'Who I Am',
+        paragraphs: [
+          'Hi, I\'m Mai — a founder, engineer, and growth strategist who turns vague ideas into scalable systems.',
+          'I\'ve built products from scratch, scaled them to millions of users, and operated across engineering, design, and growth.',
+          'As co-founder and CEO of HeyMint, I led a no-code NFT platform that served 1M+ users (including MasterCard and Ubisoft), generated $2M+ revenue, raised $3.4M in venture funding, and was acquired by Alchemy, one of the fastest-growing unicorns.',
+          'Before that, I was a Senior Software Engineer at Gusto, leading top-of-funnel growth initiatives, and earlier Head of Marketing at a Series-B startup where my campaign sold 10,000 translation devices in 3 days.',
+          'My unique strength lies in bridging product, growth, and AI: Product / Design / Engineering: I can turn abstract ideas into working prototypes. Example: Pawgrammer.com — built entirely from scratch. Marketing / Growth / GTM: I combine creativity and technical automation to scale efficiently — from building custom growth tools to optimizing entire user funnels.',
+          'Now, I help other founders move faster — by building, automating, and simplifying what they don\'t have time to do.',
+        ],
+      },
+      finalCta: {
+        title: 'Stop running your company alone',
+        cta: 'Book a Free Founder Audit',
       },
     },
   };
