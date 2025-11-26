@@ -168,7 +168,7 @@ export default function VersionContent({ version }: VersionContentProps) {
   return (
     <div className="space-y-16">
       {/* Hero Section */}
-      <section className="text-center space-y-6">
+      <section className="text-center space-y-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           className="rounded-2xl p-12 -mx-4"
           style={{
@@ -184,11 +184,7 @@ export default function VersionContent({ version }: VersionContentProps) {
             {content.hero.subtitle}
           </p>
           <div className="flex flex-col items-center gap-2 mt-10">
-            <button
-              className="inline-flex border border-transparent transition-colors items-center justify-center rounded-md bg-neutral-900 px-8 py-3 font-medium text-neutral-100"
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#5E50A0')}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '')}
-            >
+            <button className="inline-flex items-center justify-center rounded-md bg-neutral-900 hover:bg-white text-white hover:text-neutral-900 hover:border hover:border-neutral-900 px-8 py-3 font-medium transition-colors border border-transparent">
               {content.hero.cta}
             </button>
           </div>
@@ -197,7 +193,7 @@ export default function VersionContent({ version }: VersionContentProps) {
 
       {/* Problem Section (if exists) */}
       {content.problem && (
-        <section className="max-w-4xl mx-auto">
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 className="text-3xl font-medium text-gray-900 dark:text-gray-100 mb-6 leading-tight">
             {content.problem.title}
           </h3>
@@ -216,8 +212,21 @@ export default function VersionContent({ version }: VersionContentProps) {
       )}
 
       {/* Features/Examples Section */}
-      <section className="py-24 lg:py-32">
-        <div className="mx-auto max-w-5xl px-12 lg:px-0">
+      <section className="py-24 lg:py-32 w-full relative overflow-hidden rounded-b-3xl" style={{
+        backgroundImage: 'linear-gradient(to bottom, #fff 0%, #fff 40%, rgba(255, 255, 255, 0) 100%), linear-gradient(to right, #fdf6ef, #fcf3fa, #f9f1fc, #f4eefc)'
+      }}>
+        {/* Grid lines overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: 'linear-gradient(90deg, #f8f8f8 1px, transparent 1px)',
+            backgroundSize: '50px 100%',
+            maskImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 70%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 70%)'
+          }}
+        />
+
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 relative">
           <div className="mb-8">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-zinc-300/70 bg-white/70 px-3 py-1 text-sm dark:border-white/20 dark:bg-white/10">
               <svg
@@ -235,69 +244,54 @@ export default function VersionContent({ version }: VersionContentProps) {
               {content.features.title}
             </p>
           </div>
-          <div className="relative overflow-hidden rounded-2xl p-12" style={{
-            backgroundImage: 'linear-gradient(to bottom, #fff 0%, #fff 40%, rgba(255, 255, 255, 0) 100%), linear-gradient(to right, #fdf6ef, #fcf3fa, #f9f1fc, #f4eefc)'
-          }}>
-            {/* Grid lines overlay */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                backgroundImage: 'linear-gradient(90deg, #f8f8f8 1px, transparent 1px)',
-                backgroundSize: '50px 100%',
-                maskImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 70%)',
-                WebkitMaskImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 70%)'
-              }}
-            />
-            <div className="relative">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                {/* Left Column - Features List */}
-                <div className="space-y-12">
-                  {content.features.items.map((item, index) => {
-                    const isSalesItem = index === 0 && version === 'v2';
-                    const ItemWrapper = isSalesItem ? 'a' : 'div';
 
-                    return (
-                      <ItemWrapper
-                        key={index}
-                        href={isSalesItem ? '/case-studies/sales-outreach' : undefined}
-                        className={`relative block group ${isSalesItem ? 'cursor-pointer' : ''}`}
-                      >
-                        <div>
-                          <h4 className="mb-2 text-xl font-medium text-gray-900">
-                            {item.title}
-                          </h4>
-                          <p className="text-lg text-gray-700/80">
-                            {item.description}
-                            {isSalesItem && (
-                              <span className="inline-flex items-center gap-1 text-xs text-gray-600 ml-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1">
-                                <span>Learn more</span>
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  viewBox="0 0 20 20"
-                                  fill="currentColor"
-                                  className="w-3 h-3 transform transition-transform duration-300 group-hover:translate-x-1"
-                                >
-                                  <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
-                                </svg>
-                              </span>
-                            )}
-                          </p>
-                        </div>
-                      </ItemWrapper>
-                    );
-                  })}
-                </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Left Column - Features List */}
+            <div className="space-y-12">
+              {content.features.items.map((item, index) => {
+                const isSalesItem = index === 0 && version === 'v2';
+                const ItemWrapper = isSalesItem ? 'a' : 'div';
 
-                {/* Right Column - Lottie Animation */}
-                <div className="flex items-end justify-center">
-                  <div className="w-64 lg:w-80">
-                    <Lottie
-                      animationData={workLifeBalanceAnimation}
-                      loop={true}
-                      autoplay={true}
-                    />
-                  </div>
-                </div>
+                return (
+                  <ItemWrapper
+                    key={index}
+                    href={isSalesItem ? '/case-studies/sales-outreach' : undefined}
+                    className={`relative block group ${isSalesItem ? 'cursor-pointer' : ''}`}
+                  >
+                    <div>
+                      <h4 className="mb-2 text-xl font-medium text-gray-900">
+                        {item.title}
+                      </h4>
+                      <p className="text-lg text-gray-700/80">
+                        {item.description}
+                        {isSalesItem && (
+                          <span className="inline-flex items-center gap-1 text-xs text-gray-600 ml-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1">
+                            <span>Learn more</span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              className="w-3 h-3 transform transition-transform duration-300 group-hover:translate-x-1"
+                            >
+                              <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
+                            </svg>
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  </ItemWrapper>
+                );
+              })}
+            </div>
+
+            {/* Right Column - Lottie Animation */}
+            <div className="flex items-end justify-center">
+              <div className="w-64 lg:w-80">
+                <Lottie
+                  animationData={workLifeBalanceAnimation}
+                  loop={true}
+                  autoplay={true}
+                />
               </div>
             </div>
           </div>
@@ -306,7 +300,7 @@ export default function VersionContent({ version }: VersionContentProps) {
 
       {/* Stats Section (if exists) */}
       {content.stats && (
-        <section className="py-16 md:py-20">
+        <section className="py-16 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-16 text-center">
             <h3 className="mb-6 text-4xl font-medium text-gray-900 md:text-5xl lg:text-6xl dark:text-gray-100 leading-tight">
               {content.stats.title}
@@ -338,64 +332,60 @@ export default function VersionContent({ version }: VersionContentProps) {
 
       {/* Examples Section (if exists) */}
       {content.examples && (
-        <section className="relative">
+        <section className="w-full relative py-16" style={{
+          backgroundImage: `
+            repeating-linear-gradient(
+              0deg,
+              transparent,
+              transparent 19px,
+              rgba(75, 85, 99, 0.03) 19px,
+              rgba(75, 85, 99, 0.03) 20px,
+              transparent 20px,
+              transparent 39px,
+              rgba(75, 85, 99, 0.03) 39px,
+              rgba(75, 85, 99, 0.03) 40px
+            ),
+            repeating-linear-gradient(
+              90deg,
+              transparent,
+              transparent 19px,
+              rgba(75, 85, 99, 0.03) 19px,
+              rgba(75, 85, 99, 0.03) 20px,
+              transparent 20px,
+              transparent 39px,
+              rgba(75, 85, 99, 0.03) 39px,
+              rgba(75, 85, 99, 0.03) 40px
+            ),
+            radial-gradient(
+              circle at 20px 20px,
+              rgba(55, 65, 81, 0.05) 2px,
+              transparent 2px
+            ),
+            radial-gradient(
+              circle at 40px 40px,
+              rgba(55, 65, 81, 0.05) 2px,
+              transparent 2px
+            )
+          `,
+          backgroundSize: '40px 40px, 40px 40px, 40px 40px, 40px 40px'
+        }}>
           <style dangerouslySetInnerHTML={{__html: `
             .group:hover .saved-highlight {
               background-image: linear-gradient(to right, #fdf6ef, #fcf3fa, #f9f1fc, #f4eefc) !important;
               color: #111827 !important;
             }
           `}} />
-          {/* Circuit Board Background */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              backgroundImage: `
-                repeating-linear-gradient(
-                  0deg,
-                  transparent,
-                  transparent 19px,
-                  rgba(75, 85, 99, 0.03) 19px,
-                  rgba(75, 85, 99, 0.03) 20px,
-                  transparent 20px,
-                  transparent 39px,
-                  rgba(75, 85, 99, 0.03) 39px,
-                  rgba(75, 85, 99, 0.03) 40px
-                ),
-                repeating-linear-gradient(
-                  90deg,
-                  transparent,
-                  transparent 19px,
-                  rgba(75, 85, 99, 0.03) 19px,
-                  rgba(75, 85, 99, 0.03) 20px,
-                  transparent 20px,
-                  transparent 39px,
-                  rgba(75, 85, 99, 0.03) 39px,
-                  rgba(75, 85, 99, 0.03) 40px
-                ),
-                radial-gradient(
-                  circle at 20px 20px,
-                  rgba(55, 65, 81, 0.05) 2px,
-                  transparent 2px
-                ),
-                radial-gradient(
-                  circle at 40px 40px,
-                  rgba(55, 65, 81, 0.05) 2px,
-                  transparent 2px
-                )
-              `,
-              backgroundSize: '40px 40px, 40px 40px, 40px 40px, 40px 40px'
-            }}
-          />
 
-          <h3 className="text-3xl font-medium text-gray-900 dark:text-gray-100 mb-12 text-center leading-tight relative z-10">
-            5 Example <span
-              className="px-3 py-1 font-bold"
-              style={{
-                backgroundImage: 'linear-gradient(to right, #fdf6ef, #fcf3fa, #f9f1fc, #f4eefc)'
-              }}
-            >Automations</span> We've Built
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h3 className="text-3xl font-medium text-gray-900 dark:text-gray-100 mb-12 text-center leading-tight relative z-10">
+              5 Example <span
+                className="px-3 py-1 font-bold"
+                style={{
+                  backgroundImage: 'linear-gradient(to right, #fdf6ef, #fcf3fa, #f9f1fc, #f4eefc)'
+                }}
+              >Automations</span> We've Built
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
             {content.examples.items.map((item, index) => {
               const isSalesOutreach = index === 0;
 
@@ -461,13 +451,14 @@ export default function VersionContent({ version }: VersionContentProps) {
                 </div>
               );
             })}
+            </div>
           </div>
         </section>
       )}
 
       {/* About Section (if exists) */}
       {content.about && (
-        <section className="py-16 max-w-4xl mx-auto">
+        <section className="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 className="text-3xl font-medium text-gray-900 dark:text-gray-100 mb-8 text-center leading-tight">
             {content.about.title}
           </h3>
@@ -482,7 +473,7 @@ export default function VersionContent({ version }: VersionContentProps) {
       )}
 
       {/* Final CTA */}
-      <section className="py-12 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 rounded-2xl">
+      <section className="py-12 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 rounded-2xl max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - CTA Text */}
           <div className="space-y-6 text-center lg:text-left px-8">
@@ -972,104 +963,6 @@ function getContentForVersion(version: string): ContentData {
       finalCta: {
         title: 'Start Saving Time Today',
         cta: 'Free Consultation Call',
-      },
-    },
-    v6: {
-      hero: {
-        title: 'Your Fractional Founder Partner',
-        subtitle: 'Offload what slows you down. Prototype what\'s unclear. Automate what\'s repetitive.',
-        cta: 'Book a Free Founder Audit →',
-      },
-      problem: {
-        title: 'What I Do',
-        points: [
-          'Offload Anything You Don\'t Have Time For - Research, ops cleanup, pitch deck polish, investor update doc, hiring coordination, team offsite/activity planning — all handled.',
-          'Prototype Vague Ideas Quickly - Got an idea that\'s not yet scoped? I\'ll turn it into a working draft, build MVP, set up analytics, come up with GTM and run experiments.',
-          'Bring AI Into Your Workflow for Cost Saving - I analyze your marketing, sales, or operations workflow, then design and implement automations or GPT/Claude-based tools that save time and cost.',
-        ],
-      },
-      stats: {
-        title: 'How It Works',
-        items: [
-          { value: 'Discovery', label: 'Free call to discuss what you need help with and scope the work' },
-          { value: '20 hours', label: 'Trial week to see how well we work together' },
-          { value: '$100-$150', label: 'Hourly rate depending on tasks' },
-        ],
-      },
-      features: {
-        title: 'Example Work You Can Request',
-        items: [
-          {
-            icon: 'rocket',
-            title: 'Build MVP in a Week',
-            description: 'Validate with 100 users before hiring engineers',
-          },
-          {
-            icon: 'document',
-            title: 'AI-Powered Experiments',
-            description: 'Design and launch pricing experiments that drive conversion lift',
-          },
-          {
-            icon: 'mail',
-            title: 'Workflow Automation',
-            description: 'Audit and automate weekly reporting and outreach',
-          },
-          {
-            icon: 'chat',
-            title: 'Investor Updates',
-            description: 'AI-powered summaries reducing prep time from 4 hours to 30 minutes',
-          },
-          {
-            icon: 'users',
-            title: 'Content Generation',
-            description: 'GPT-based tools for LinkedIn & newsletter posts',
-          },
-        ],
-      },
-      examples: {
-        title: 'Example Projects',
-        items: [
-          {
-            icon: 'rocket',
-            title: 'MVP Development',
-            description: 'Built product MVP in one week, enabling validation with 100 users before hiring engineers',
-          },
-          {
-            icon: 'document',
-            title: 'AI Pricing Experiment',
-            description: 'Designed and launched AI-powered pricing test (saved 20 hrs implementation)',
-          },
-          {
-            icon: 'mail',
-            title: 'Workflow Automation',
-            description: 'Automated weekly reporting and outreach (saved 15 hrs/week)',
-          },
-          {
-            icon: 'chat',
-            title: 'Investor Updates',
-            description: 'AI-powered summaries reduced prep from 4 hours to 30 minutes (saved 3.5 hrs/update)',
-          },
-          {
-            icon: 'users',
-            title: 'Landing Page Rebuild',
-            description: 'Rebuilt landing pages with no-code AI, delivery time from 3 weeks to 3 days (saved 18 days)',
-          },
-        ],
-      },
-      about: {
-        title: 'Who I Am',
-        paragraphs: [
-          'Hi, I\'m Mai — a founder, engineer, and growth strategist who turns vague ideas into scalable systems.',
-          'I\'ve built products from scratch, scaled them to millions of users, and operated across engineering, design, and growth.',
-          'As co-founder and CEO of HeyMint, I led a no-code NFT platform that served 1M+ users (including MasterCard and Ubisoft), generated $2M+ revenue, raised $3.4M in venture funding, and was acquired by Alchemy, one of the fastest-growing unicorns.',
-          'Before that, I was a Senior Software Engineer at Gusto, leading top-of-funnel growth initiatives, and earlier Head of Marketing at a Series-B startup where my campaign sold 10,000 translation devices in 3 days.',
-          'My unique strength lies in bridging product, growth, and AI: Product / Design / Engineering: I can turn abstract ideas into working prototypes. Example: Pawgrammer.com — built entirely from scratch. Marketing / Growth / GTM: I combine creativity and technical automation to scale efficiently — from building custom growth tools to optimizing entire user funnels.',
-          'Now, I help other founders move faster — by building, automating, and simplifying what they don\'t have time to do.',
-        ],
-      },
-      finalCta: {
-        title: 'Stop running your company alone',
-        cta: 'Book a Free Founder Audit',
       },
     },
   };

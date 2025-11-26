@@ -527,7 +527,7 @@ export default function SalesOutreachCaseStudy() {
                   </svg>
                 </button>
 
-                {isTechArchOpen && (
+                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isTechArchOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
                   <div className="p-6 space-y-6">
                     <div>
                       <p className="text-gray-900 dark:text-gray-100 font-semibold text-lg mb-3">
@@ -560,11 +560,11 @@ export default function SalesOutreachCaseStudy() {
                       }}
                     >
                       <p className="text-gray-900">
-                        <strong>What this means for you:</strong> Non-technical buyers stay focused on value without getting overwhelmed. Technical buyers can dig into the architecture and see professional engineering. Everyone gets a product that's flexible, reliable, and built to last.
+                        <strong>What this means for you:</strong> You get a custom sales automation solution built with proven tools that's tailored to your exact workflow. No vendor lock-in, no black boxes—just flexible automation that scales with your team and adapts as your process evolves.
                       </p>
                     </div>
                   </div>
-                )}
+                </div>
               </div>
             </div>
           </div>

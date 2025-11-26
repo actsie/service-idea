@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import NavigationBar from '@/components/NavigationBar';
 import VersionContent from '@/components/VersionContent';
 
@@ -16,40 +15,23 @@ interface HeroData {
   }>;
 }
 
-function getHeroData(version: string): HeroData {
-  const heroData: Record<string, HeroData> = {
-    v6: {
-      badge: 'Fractional Founder Partner',
-      title: 'Your on-call cofounder to turn clarity into action',
-      subtitle: 'Offload what slows you down. Prototype what\'s unclear. Automate what\'s repetitive.',
-      primaryCta: 'Book Free Founder Audit',
-      secondaryCta: 'Learn More',
-      stats: [
-        { value: '$100-$150', label: 'Hourly Rate' },
-        { value: '20 hours', label: 'Trial Period' },
-        { value: '1 Week', label: 'MVP Turnaround' },
-      ],
-    },
-    default: {
-      badge: 'AI Automation',
-      title: 'Stop hiring people to solve problems AI can handle in 10 minutes',
-      subtitle: 'Your fractional AI Operations Lead. We find the bottlenecks, build the solutions, and train your team.',
-      primaryCta: 'Book Free Call',
-      secondaryCta: 'Learn More',
-      stats: [
-        { value: '$80K-$120K', label: 'Saved vs. Full-time' },
-        { value: '20-30 hrs', label: 'Saved Per Week' },
-        { value: '2 Weeks', label: 'Implementation' },
-      ],
-    },
+function getHeroData(): HeroData {
+  return {
+    badge: 'AI Automation',
+    title: 'Stop hiring people to solve problems AI can handle in 10 minutes',
+    subtitle: 'Your fractional AI Operations Lead. We find the bottlenecks, build the solutions, and train your team.',
+    primaryCta: 'Book Free Call',
+    secondaryCta: 'Learn More',
+    stats: [
+      { value: '$80K-$120K', label: 'Saved vs. Full-time' },
+      { value: '20-30 hrs', label: 'Saved Per Week' },
+      { value: '2 Weeks', label: 'Implementation' },
+    ],
   };
-
-  return heroData[version] || heroData.default;
 }
 
 export default function Home() {
-  const [currentVersion, setCurrentVersion] = useState('v2');
-  const heroData = getHeroData(currentVersion);
+  const heroData = getHeroData();
 
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-950 text-gray-800 dark:text-neutral-100 relative isolate antialiased">
@@ -61,10 +43,7 @@ export default function Home() {
       </div>
 
       {/* Navigation */}
-      <NavigationBar
-        currentVersion={currentVersion}
-        onVersionChange={setCurrentVersion}
-      />
+      <NavigationBar />
 
       {/* Hero Section */}
       <main className="mx-auto px-8 relative z-20 max-w-7xl">
@@ -91,9 +70,7 @@ export default function Home() {
             <div className="sm:flex-row flex flex-col gap-4 justify-center">
               <button
                 type="button"
-                className="inline-flex border border-transparent transition-colors items-center justify-center rounded-md bg-neutral-900 px-8 py-3 font-medium text-neutral-100"
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#5E50A0')}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '')}
+                className="inline-flex items-center justify-center rounded-md bg-neutral-900 hover:bg-white text-white hover:text-neutral-900 hover:border hover:border-neutral-900 px-8 py-3 font-medium transition-colors border border-transparent"
               >
                 {heroData.primaryCta}
               </button>
@@ -114,12 +91,12 @@ export default function Home() {
       </main>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <VersionContent version={currentVersion} />
+      <div className="py-16">
+        <VersionContent version="v2" />
       </div>
 
       {/* Footer */}
-      <footer className="bg-white dark:bg-gray-800 mt-16">
+      <footer className="bg-white dark:bg-gray-800 mt-16 rounded-t-3xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-center sm:text-left text-gray-600 dark:text-gray-400 text-sm">
