@@ -250,13 +250,16 @@ export default function VersionContent({ version }: VersionContentProps) {
             <div className="space-y-12">
               {content.features.items.map((item, index) => {
                 const isSalesItem = index === 0 && version === 'v2';
-                const ItemWrapper = isSalesItem ? 'a' : 'div';
+                const isSupportItem = index === 4 && version === 'v2';
+                const isClickable = isSalesItem || isSupportItem;
+                const ItemWrapper = isClickable ? 'a' : 'div';
+                const href = isSalesItem ? '/case-studies/sales-outreach' : isSupportItem ? '/case-studies/support-triage' : undefined;
 
                 return (
                   <ItemWrapper
                     key={index}
-                    href={isSalesItem ? '/case-studies/sales-outreach' : undefined}
-                    className={`relative block group ${isSalesItem ? 'cursor-pointer' : ''}`}
+                    href={href}
+                    className={`relative block group ${isClickable ? 'cursor-pointer' : ''}`}
                   >
                     <div>
                       <h4 className="mb-2 text-xl font-medium text-gray-900">
@@ -264,7 +267,7 @@ export default function VersionContent({ version }: VersionContentProps) {
                       </h4>
                       <p className="text-lg text-gray-700/80">
                         {item.description}
-                        {isSalesItem && (
+                        {isClickable && (
                           <span className="inline-flex items-center gap-1 text-xs text-gray-600 ml-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1">
                             <span>Learn more</span>
                             <svg
@@ -388,6 +391,7 @@ export default function VersionContent({ version }: VersionContentProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
             {content.examples.items.map((item, index) => {
               const isSalesOutreach = index === 0;
+              const isSupportTriage = index === 3;
 
               const CardContent = (
                 <div className="group cursor-pointer transform transition-all duration-200 hover:scale-105 hover:-rotate-1">
@@ -441,15 +445,25 @@ export default function VersionContent({ version }: VersionContentProps) {
               </div>
               );
 
-              return isSalesOutreach ? (
-                <Link key={index} href="/case-studies/sales-outreach">
-                  {CardContent}
-                </Link>
-              ) : (
-                <div key={index}>
-                  {CardContent}
-                </div>
-              );
+              if (isSalesOutreach) {
+                return (
+                  <Link key={index} href="/case-studies/sales-outreach">
+                    {CardContent}
+                  </Link>
+                );
+              } else if (isSupportTriage) {
+                return (
+                  <Link key={index} href="/case-studies/support-triage">
+                    {CardContent}
+                  </Link>
+                );
+              } else {
+                return (
+                  <div key={index}>
+                    {CardContent}
+                  </div>
+                );
+              }
             })}
             </div>
           </div>
@@ -785,7 +799,7 @@ function getContentForVersion(version: string): ContentData {
           },
           {
             icon: 'chat',
-            title: 'Support: 20hrs → 4hrs',
+            title: 'Support: 85% time saved',
             description: 'AI triage and response generation',
           },
         ],
@@ -796,7 +810,7 @@ function getContentForVersion(version: string): ContentData {
           {
             icon: 'mail',
             title: 'GTM Operations Console',
-            description: 'Unified prospect & follow-up management with 90% time reduction on follow-ups',
+            description: 'Unified prospect & follow-up management with 90% time reduction on follow-ups (saved 2-3 hrs/day)',
           },
           {
             icon: 'users',
@@ -811,7 +825,7 @@ function getContentForVersion(version: string): ContentData {
           {
             icon: 'chat',
             title: 'Support triage',
-            description: 'AI categorizes and drafts responses (saved 15 hrs/week)',
+            description: 'AI categorizes and drafts responses (saved 10+ hrs/day)',
           },
           {
             icon: 'rocket',
@@ -951,7 +965,7 @@ function getContentForVersion(version: string): ContentData {
           {
             icon: 'chat',
             title: 'Support triage',
-            description: 'AI categorizes and drafts responses (saved 15 hrs/week)',
+            description: 'AI categorizes and drafts responses (saved 10+ hrs/day)',
           },
           {
             icon: 'rocket',
