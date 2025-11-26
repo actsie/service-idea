@@ -83,11 +83,11 @@ const caseStudies: CaseStudy[] = [
   },
   {
     icon: 'chat',
-    title: 'Support Triage',
-    description: 'AI categorizes and drafts responses',
-    timeSaved: 'Saved 15 hrs/week',
-    slug: '#',
-    available: false,
+    title: 'Support Autopilot',
+    description: 'AI-powered customer support automation reducing response time by 85%',
+    timeSaved: '< 5 sec processing, 70% auto-approved',
+    slug: '/case-studies/support-triage',
+    available: true,
   },
   {
     icon: 'rocket',
