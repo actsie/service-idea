@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import CaseStudyLayout from '@/components/CaseStudyLayout';
+import ImageLightbox from '@/components/ImageLightbox';
 
 export default function SupportTriageCaseStudy() {
   const [isTechArchOpen, setIsTechArchOpen] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState<{src: string, alt: string} | null>(null);
 
   return (
     <CaseStudyLayout studyName="Support Autopilot">
@@ -133,11 +135,12 @@ export default function SupportTriageCaseStudy() {
 
           {/* System Architecture Mindmap */}
           <div className="mb-12">
-            <a
-              href="/support-autopilot-mindmap-2.png"
-              target="_blank"
-              rel="noopener noreferrer"
+            <div
               className="block rounded-lg overflow-hidden cursor-pointer group"
+              onClick={() => setLightboxImage({
+                src: '/support-autopilot-mindmap-2.png',
+                alt: 'Support Autopilot System Architecture'
+              })}
             >
               <img
                 src="/support-autopilot-mindmap-2.png"
@@ -149,7 +152,7 @@ export default function SupportTriageCaseStudy() {
                   Click to view at original size
                 </p>
               </div>
-            </a>
+            </div>
           </div>
 
           {/* Real-Time Email Ingestion */}
@@ -168,7 +171,13 @@ export default function SupportTriageCaseStudy() {
                 </ol>
               </div>
             </div>
-            <div className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+            <div
+              className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 cursor-pointer"
+              onClick={() => setLightboxImage({
+                src: '/Real-Time-Email-Ingestion.png',
+                alt: 'n8n workflow showing real-time email ingestion with Pub/Sub webhook'
+              })}
+            >
               <img
                 src="/Real-Time-Email-Ingestion.png"
                 alt="n8n workflow showing real-time email ingestion with Pub/Sub webhook"
@@ -195,7 +204,13 @@ export default function SupportTriageCaseStudy() {
                 </ul>
               </div>
             </div>
-            <div className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+            <div
+              className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 cursor-pointer"
+              onClick={() => setLightboxImage({
+                src: '/Intelligent-Ticket-Creation.png',
+                alt: 'Airtable database showing tickets with all metadata fields'
+              })}
+            >
               <img
                 src="/Intelligent-Ticket-Creation.png"
                 alt="Airtable database showing tickets with all metadata fields"
@@ -231,7 +246,13 @@ export default function SupportTriageCaseStudy() {
             </div>
 
             {/* AI Classification Screenshot */}
-            <div className="mb-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+            <div
+              className="mb-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 cursor-pointer"
+              onClick={() => setLightboxImage({
+                src: '/AI-Classification.png',
+                alt: 'n8n execution showing AI classification output with intent, priority, and VIP status'
+              })}
+            >
               <img
                 src="/AI-Classification.png"
                 alt="n8n execution showing AI classification output with intent, priority, and VIP status"
@@ -240,7 +261,13 @@ export default function SupportTriageCaseStudy() {
             </div>
 
             {/* AI Draft Generation Screenshot */}
-            <div className="mb-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+            <div
+              className="mb-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 cursor-pointer"
+              onClick={() => setLightboxImage({
+                src: '/AI-Draft-Generation.png',
+                alt: 'n8n execution showing AI-generated email draft with subject and body'
+              })}
+            >
               <img
                 src="/AI-Draft-Generation.png"
                 alt="n8n execution showing AI-generated email draft with subject and body"
@@ -261,7 +288,13 @@ export default function SupportTriageCaseStudy() {
             </div>
 
             {/* SLA Calculation Screenshot */}
-            <div className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+            <div
+              className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 cursor-pointer"
+              onClick={() => setLightboxImage({
+                src: '/Automatic-SLA-Calculation.png',
+                alt: 'Automatic SLA deadline calculation in n8n workflow'
+              })}
+            >
               <img
                 src="/Automatic-SLA-Calculation.png"
                 alt="Automatic SLA deadline calculation in n8n workflow"
@@ -311,7 +344,13 @@ export default function SupportTriageCaseStudy() {
             </div>
 
             {/* Desktop App Screenshot */}
-            <div className="mb-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+            <div
+              className="mb-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 cursor-pointer"
+              onClick={() => setLightboxImage({
+                src: '/Desktop-Review-App.png',
+                alt: 'Electron desktop app showing ticket list and draft review interface with Approve/Skip/Regenerate buttons'
+              })}
+            >
               <img
                 src="/Desktop-Review-App.png"
                 alt="Electron desktop app showing ticket list and draft review interface with Approve/Skip/Regenerate buttons"
@@ -332,7 +371,13 @@ export default function SupportTriageCaseStudy() {
             </div>
 
             {/* Thread Handling Screenshot */}
-            <div className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+            <div
+              className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 cursor-pointer"
+              onClick={() => setLightboxImage({
+                src: '/Thread-Handling.png',
+                alt: 'Airtable showing ticket with appended reply text from customer'
+              })}
+            >
               <img
                 src="/Thread-Handling.png"
                 alt="Airtable showing ticket with appended reply text from customer"
@@ -725,6 +770,15 @@ export default function SupportTriageCaseStudy() {
           </div>
         </div>
       </main>
+
+      {/* Lightbox */}
+      {lightboxImage && (
+        <ImageLightbox
+          src={lightboxImage.src}
+          alt={lightboxImage.alt}
+          onClose={() => setLightboxImage(null)}
+        />
+      )}
     </CaseStudyLayout>
   );
 }

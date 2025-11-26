@@ -5,9 +5,11 @@ import { useState } from 'react';
 import workingAnimation from '@/public/working.json';
 import inboxAnimation from '@/public/inbox.json';
 import CaseStudyLayout from '@/components/CaseStudyLayout';
+import ImageLightbox from '@/components/ImageLightbox';
 
 export default function SalesOutreachCaseStudy() {
   const [isTechArchOpen, setIsTechArchOpen] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState<{src: string, alt: string} | null>(null);
 
   return (
     <CaseStudyLayout studyName="Sales Outreach">
@@ -144,11 +146,16 @@ export default function SalesOutreachCaseStudy() {
 
                 {/* Prospects Main View Screenshot */}
                 <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
-                  <img
-                    src="/ProspectsTab-MainView.png"
-                    alt="Prospects Tab Main View - Unified dashboard with all prospects"
-                    className="w-full h-auto"
-                  />
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => setLightboxImage({ src: '/ProspectsTab-MainView.png', alt: 'Prospects Tab Main View - Unified dashboard with all prospects' })}
+                  >
+                    <img
+                      src="/ProspectsTab-MainView.png"
+                      alt="Prospects Tab Main View - Unified dashboard with all prospects"
+                      className="w-full h-auto"
+                    />
+                  </div>
                   <div className="bg-gray-50 dark:bg-gray-900 px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
                     Manage all cold outreach prospects in one unified dashboard. Status tracking, contextual notes, and one-click AI draft generation eliminate the need for spreadsheets and constant context switching.
                   </div>
@@ -166,11 +173,16 @@ export default function SalesOutreachCaseStudy() {
 
                 {/* Prospects Draft Modal Screenshot */}
                 <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
-                  <img
-                    src="/ProspectsTab-DraftModal.png"
-                    alt="Prospects Tab Draft Modal - AI-generated personalized email"
-                    className="w-full h-auto"
-                  />
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => setLightboxImage({ src: '/ProspectsTab-DraftModal.png', alt: 'Prospects Tab Draft Modal - AI-generated personalized email' })}
+                  >
+                    <img
+                      src="/ProspectsTab-DraftModal.png"
+                      alt="Prospects Tab Draft Modal - AI-generated personalized email"
+                      className="w-full h-auto"
+                    />
+                  </div>
                   <div className="bg-gray-50 dark:bg-gray-900 px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
                     Generate personalized email drafts in seconds with AI. Review, edit, and send—then watch as three follow-up drafts auto-queue for review.
                   </div>
@@ -223,11 +235,16 @@ export default function SalesOutreachCaseStudy() {
 
                 {/* Follow-ups Pending Review Screenshot */}
                 <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
-                  <img
-                    src="/Follow-upsTab-PendingReview.png"
-                    alt="Follow-ups Tab Pending Review - Batch review workflow"
-                    className="w-full h-auto"
-                  />
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => setLightboxImage({ src: '/Follow-upsTab-PendingReview.png', alt: 'Follow-ups Tab Pending Review - Batch review workflow' })}
+                  >
+                    <img
+                      src="/Follow-upsTab-PendingReview.png"
+                      alt="Follow-ups Tab Pending Review - Batch review workflow"
+                      className="w-full h-auto"
+                    />
+                  </div>
                   <div className="bg-gray-50 dark:bg-gray-900 px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
                     Batch review follow-up drafts with urgency filters showing what's due today, overdue, or needs attention. Approve, skip, or regenerate with one click.
                   </div>
@@ -248,11 +265,16 @@ export default function SalesOutreachCaseStudy() {
 
                 {/* Follow-ups Thread View Screenshot */}
                 <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
-                  <img
-                    src="/Follow-upsTab-ThreadView.png"
-                    alt="Follow-ups Tab Thread View - Full email sequence preview"
-                    className="w-full h-auto"
-                  />
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => setLightboxImage({ src: '/Follow-upsTab-ThreadView.png', alt: 'Follow-ups Tab Thread View - Full email sequence preview' })}
+                  >
+                    <img
+                      src="/Follow-upsTab-ThreadView.png"
+                      alt="Follow-ups Tab Thread View - Full email sequence preview"
+                      className="w-full h-auto"
+                    />
+                  </div>
                   <div className="bg-gray-50 dark:bg-gray-900 px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
                     See the entire email sequence before it sends. All three follow-ups (Day 3, 7, 14) in one view for full context and control.
                   </div>
@@ -260,11 +282,16 @@ export default function SalesOutreachCaseStudy() {
 
                 {/* Follow-ups Sent Emails Screenshot */}
                 <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 mt-6">
-                  <img
-                    src="/Follow-upsTab-SentEmails.png"
-                    alt="Follow-ups Tab Sent Emails - Conversation tracking"
-                    className="w-full h-auto"
-                  />
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => setLightboxImage({ src: '/Follow-upsTab-SentEmails.png', alt: 'Follow-ups Tab Sent Emails - Conversation tracking' })}
+                  >
+                    <img
+                      src="/Follow-upsTab-SentEmails.png"
+                      alt="Follow-ups Tab Sent Emails - Conversation tracking"
+                      className="w-full h-auto"
+                    />
+                  </div>
                   <div className="bg-gray-50 dark:bg-gray-900 px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
                     Track every conversation with full email thread visibility. Know exactly which stage each prospect is at (FU#1, FU#2, FU#3) and see replies instantly.
                   </div>
@@ -689,6 +716,15 @@ export default function SalesOutreachCaseStudy() {
           </div>
         </div>
       </section>
+
+      {/* Lightbox */}
+      {lightboxImage && (
+        <ImageLightbox
+          src={lightboxImage.src}
+          alt={lightboxImage.alt}
+          onClose={() => setLightboxImage(null)}
+        />
+      )}
     </CaseStudyLayout>
   );
 }
